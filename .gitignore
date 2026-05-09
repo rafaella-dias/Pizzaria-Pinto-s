@@ -1,3 +1,13 @@
 venv/
+.env
+.env.local
+.env.porduction
+.env/
 __pycache__/
 *.pyc
+
+.vscode/
+.idea/
+
+db.sqlite3
+*.log
