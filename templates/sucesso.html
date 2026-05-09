@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"><!DOCTYPE html>
+    <title>Pedido Realizado</title>
+
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/sucesso.css') }}">
+</head>
+
+<body>
+
+    <main class="container">
+
+        <h1>
+            Pedido realizado com sucesso!
+        </h1>
+
+        <p>
+            Pedido #{{ pedido.id }}
+        </p>
+
+        <p>
+            Status:
+            {{ pedido.status }}
+        </p>
+
+    </main>
+
+</body>
+</html>

@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <title>Carrinho</title>
+
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/carrinho.css') }}">
+</head>
+
+<body>
+
+    <main class="container">
+
+        <h1>Seu Carrinho</h1>
+
+        {% if carrinho %}
+
+            {% for item in carrinho %}
+
+                <div class="item">
+                    <h2>{{ item.nome }}</h2>
+
+                    <p>Quantidade: {{ item.quantidade }}</p>
+
+                    <p>Preço: R$ {{ item.preco }}</p>
+
+                    <p>
+                        Subtotal:
+                        R$ {{ item.preco * item.quantidade }}
+                    </p>
+                </div>
+
+                <hr>
+
+            {% endfor %}
+
+            <h2>Total: R$ {{ total }}</h2>
+
+            <form action="/finalizar" method="POST">
+
+                <input
+                    type="text"
+                    name="nome_cliente"
+                    placeholder="Seu nome"
+                    required
+                >
+
+                <button type="submit">
+                    Finalizar Pedido
+                </button>
+
+            </form>
+            
+
+        {% else %}
+
+            <p>Seu carrinho está vazio.</p>
+
+        {% endif %}
+
+        
+
+    </main>
+
+</body>
+</html>
