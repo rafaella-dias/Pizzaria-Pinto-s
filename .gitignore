@@ -1,7 +1,7 @@
 venv/
 .env
 .env.local
-.env.porduction
+.env.production
 .env/
 __pycache__/
 *.pyc

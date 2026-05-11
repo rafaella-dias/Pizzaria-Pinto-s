@@ -23,7 +23,8 @@ def home():
 
 @app.route('/cardapio')
 def cardapio():
-    produtos = Produto.query.all()
+    # Não exibe produtos marcados como 'Antiga'
+    produtos = Produto.query.filter(~Produto.nome.contains('Antiga')).all()
     return render_template('cardapio.html', produtos=produtos)
 
 

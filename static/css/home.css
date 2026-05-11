@@ -1,46 +1,77 @@
+/* Reset padrão */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Arial', sans-serif;
+}
+
 body {
-  margin: 0;
-  font-family: Arial, sans-serif;
-  background-color: #fffaf1;
+    /* Cor de fundo creme da imagem */
+    background-color: #FDF5E6;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
 }
 
 .container {
-  text-align: center;
-  margin-top: 80px;
+    text-align: center;
+    width: 100%;
+    max-width: 450px;
 }
 
+/* Ajuste da Imagem/Logo */
 .logo {
-  width: 120px;
+    width: 400px;
+    /* Tamanho proporcional à logo da imagem */
+    height: auto;
+    margin-bottom: -80px;
+    /* Aproxima o título da imagem */
 }
 
+/* Título Pizzaria Pinto's */
 h1 {
-  color: #c40018;
-  font-size: 32px;
-  margin: 10px 0 0;
+    color: #D30010;
+    /* Vermelho forte */
+    font-size: 3.2rem;
+    font-weight: 900;
+    margin-bottom: 0;
 }
 
+/* Texto Since 2026 */
 .since {
-  color: #c40018;
-  font-size: 14px;
-  margin-bottom: 20px;
+    color: #D30010;
+    font-size: 0.85rem;
+    font-weight: bold;
+    margin-top: -5px;
+    margin-bottom: 45px;
 }
 
+/* Frase "Peça sua pizza!" */
 h2 {
-  color: #2e6b3f;
-  margin-bottom: 30px;
+    color: #1E5631;
+    /* Verde bem escuro */
+    font-size: 1.6rem;
+    font-weight: bold;
+    margin-bottom: 35px;
 }
 
-.buttons button {
-  background-color: #c40018;
-  color: white;
-  border: none;
-  padding: 12px 25px;
-  margin: 10px;
-  border-radius: 12px;
-  cursor: pointer;
-  font-size: 16px;
+/* Botão Cardápio */
+#cardapioBtn {
+    background-color: #D30010;
+    color: white;
+    border: none;
+    padding: 14px 75px;
+    font-size: 1.4rem;
+    font-weight: bold;
+    border-radius: 20px;
+    /* Bordas bem arredondadas como na foto */
+    cursor: pointer;
+    transition: background 0.3s, transform 0.2s;
 }
 
-.buttons button:hover {
-  background-color: #a00014;
+#cardapioBtn:hover {
+    background-color: #A0000C;
+    transform: scale(1.02);
 }

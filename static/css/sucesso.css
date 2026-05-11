@@ -1,0 +1,138 @@
+/* =============================================
+   Sucesso - Pizzaria Pinto's
+   ============================================= */
+
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;800&display=swap');
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    background-color: #D30010; /* Fundo vermelho da imagem */
+    font-family: 'Montserrat', sans-serif;
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+}
+
+/* ── Header / Botão Voltar ── */
+.btn-voltar {
+    position: absolute;
+    top: 30px;
+    left: 20px;
+    background: none;
+    border: none;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* ── Container da Mensagem ── */
+.container-sucesso {
+    background-color: #FFF8E7; /* Fundo creme */
+    border-radius: 50px;
+    padding: 50px 30px 40px;
+    width: 100%;
+    max-width: 550px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+}
+
+/* ── Ícone de Check ── */
+.check-circle {
+    width: 160px;
+    height: 160px;
+    background-color: #D30010;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 24px;
+}
+
+.check-circle svg {
+    width: 80px;
+    height: 80px;
+    color: #fff;
+}
+
+/* ── Textos ── */
+.container-sucesso h1 {
+    font-size: 1.6rem;
+    font-weight: 800;
+    color: #000;
+    margin-bottom: 4px;
+}
+
+.container-sucesso p {
+    font-size: 1.1rem;
+    font-weight: 400;
+    color: #333;
+    margin-bottom: 40px;
+}
+
+/* ── Barra de Progresso ── */
+.progress-container {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    max-width: 400px;
+    gap: 10px;
+}
+
+.progress-step {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+}
+
+.progress-bar {
+    width: 100%;
+    height: 12px;
+    background-color: #D3D5D7; /* Cinza para inativo */
+    border-radius: 10px;
+    transition: background-color 0.3s ease;
+}
+
+/* Estado Ativo (Verde) */
+.progress-bar.active {
+    background-color: #8CC63F; /* Verde */
+}
+
+.progress-label {
+    font-size: 0.85rem;
+    color: #000;
+    font-weight: 500;
+}
+
+/* Responsivo */
+@media (max-width: 500px) {
+    .check-circle {
+        width: 120px;
+        height: 120px;
+    }
+    .check-circle svg {
+        width: 60px;
+        height: 60px;
+    }
+    .container-sucesso h1 {
+        font-size: 1.3rem;
+    }
+    .container-sucesso p {
+        font-size: 0.95rem;
+    }
+    .progress-label {
+        font-size: 0.75rem;
+    }
+}

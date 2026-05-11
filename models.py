@@ -7,6 +7,7 @@ class Produto(db.Model): #cardápio
 
     id = db.Column(db.Integer, primary_key=True)
     nome = db.Column(db.String(100), nullable=False)
+    descricao = db.Column(db.String(255))
     preco = db.Column(db.Float, nullable=False)
     imagem = db.Column(db.String(255))
 

@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -13,7 +14,8 @@
 
         <!-- Logo -->
         <div class="header">
-            <img class="logo-img" src="{{ url_for('static', filename='img/logo.pizza.png') }}" alt="Logo Pizzaria Pinto's">
+            <img class="logo-img" src="{{ url_for('static', filename='img/logo.pizza.png') }}"
+                alt="Logo Pizzaria Pinto's">
         </div>
 
         <!-- Cardápio + Painel de Tamanho -->
@@ -27,11 +29,11 @@
                     <!-- Miniatura -->
                     <div class="pizza-thumb">
                         {% if produto.imagem %}
-                            {% if produto.imagem.startswith('http') %}
-                                <img src="{{ produto.imagem }}" alt="{{ produto.nome }}">
-                            {% else %}
-                                <img src="{{ url_for('static', filename='img/' + produto.imagem) }}" alt="{{ produto.nome }}">
-                            {% endif %}
+                        {% if produto.imagem.startswith('http') %}
+                        <img src="{{ produto.imagem }}" alt="{{ produto.nome }}">
+                        {% else %}
+                        <img src="{{ url_for('static', filename='img/' + produto.imagem) }}" alt="{{ produto.nome }}">
+                        {% endif %}
                         {% endif %}
                     </div>
 
@@ -115,4 +117,5 @@
         }
     </script>
 </body>
+
 </html>

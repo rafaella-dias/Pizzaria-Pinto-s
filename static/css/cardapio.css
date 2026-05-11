@@ -1,0 +1,280 @@
+/* =============================================
+   Cardápio - Pizzaria Pinto's
+   ============================================= */
+
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@1,700;1,800&family=Montserrat:wght@400;600;700;800&display=swap');
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    background-color: #FFF8EC;
+    font-family: 'Montserrat', sans-serif;
+    min-height: 100vh;
+    display: flex;
+    align-items: flex-start;
+    justify-content: center;
+    padding: 20px 20px 100px;
+}
+
+/* ── Container principal ── */
+.container {
+    width: 100%;
+    max-width: 900px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+}
+
+/* ── Logo ── */
+.header {
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
+    /* Empurra a logo mais para baixo */
+    margin-bottom: -10px;
+    /* Puxa a logo para mais perto do box vermelho */
+}
+
+.logo-img {
+    width: 320px;
+    height: auto;
+    filter: drop-shadow(0 4px 10px rgba(0, 0, 0, 0.12));
+}
+
+/* ── Layout do cardápio ── */
+.cardapio-wrapper {
+    display: flex;
+    align-items: flex-start;
+    gap: 20px;
+    width: 100%;
+}
+
+/* ── Card vermelho com lista de pizzas ── */
+.cardapio {
+    background-color: #C8001E;
+    border-radius: 18px;
+    padding: 16px 14px;
+    flex: 1;
+    max-height: 440px;
+    overflow-y: auto;
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+    scrollbar-width: thin;
+    scrollbar-color: rgba(255, 255, 255, 0.4) transparent;
+}
+
+.cardapio::-webkit-scrollbar {
+    width: 5px;
+}
+
+.cardapio::-webkit-scrollbar-track {
+    background: transparent;
+}
+
+.cardapio::-webkit-scrollbar-thumb {
+    background: rgba(255, 255, 255, 0.4);
+    border-radius: 10px;
+}
+
+/* ── Card individual da pizza ── */
+.pizza-card {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 10px 8px;
+    border-radius: 12px;
+    transition: background 0.2s ease;
+}
+
+.pizza-card:hover {
+    background: rgba(255, 255, 255, 0.07);
+}
+
+/* ── Miniatura ── */
+.pizza-thumb {
+    width: 60px;
+    height: 60px;
+    background: #fff;
+    border-radius: 12px;
+    flex-shrink: 0;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.pizza-thumb img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 12px;
+}
+
+/* ── Info da pizza ── */
+.pizza-info {
+    flex: 1;
+    min-width: 0;
+}
+
+.pizza-info h2 {
+    font-size: 0.92rem;
+    font-weight: 800;
+    color: #FFFFFF;
+    text-transform: uppercase;
+    letter-spacing: 0.6px;
+    margin-bottom: 3px;
+}
+
+.pizza-info p {
+    font-size: 0.70rem;
+    font-weight: 400;
+    color: rgba(255, 255, 255, 0.88);
+    line-height: 1.4;
+    margin-bottom: 3px;
+}
+
+.pizza-info .preco {
+    font-size: 0.82rem;
+    font-weight: 700;
+    color: #8BED4F;
+}
+
+/* ── Contador de quantidade ── */
+.quantidade-ctrl {
+    display: flex;
+    align-items: center;
+    gap: 0;
+    background: #96000F;
+    border-radius: 20px;
+    padding: 5px 10px;
+    flex-shrink: 0;
+}
+
+.qty-btn {
+    background: none;
+    border: none;
+    color: #fff;
+    font-size: 1.1rem;
+    font-weight: 700;
+    cursor: pointer;
+    width: 24px;
+    height: 24px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    transition: background 0.15s;
+    line-height: 1;
+}
+
+.qty-btn:hover {
+    background: rgba(255, 255, 255, 0.15);
+}
+
+.qty-num {
+    color: #fff;
+    font-size: 0.95rem;
+    font-weight: 700;
+    min-width: 22px;
+    text-align: center;
+}
+
+/* ── Painel lateral de tamanhos ── */
+.tamanho-panel {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+    padding-top: 4px;
+}
+
+.tamanho-label {
+    font-size: 1.3rem;
+    font-weight: 800;
+    color: #B50000;
+    letter-spacing: 1px;
+    margin-bottom: 2px;
+}
+
+.tamanho-btn {
+    width: 58px;
+    height: 38px;
+    background-color: #C8001E;
+    color: #fff;
+    border: none;
+    border-radius: 20px;
+    font-family: 'Montserrat', sans-serif;
+    font-size: 0.95rem;
+    font-weight: 700;
+    cursor: pointer;
+    transition: background 0.2s ease, transform 0.15s ease, box-shadow 0.2s ease;
+    box-shadow: 0 3px 8px rgba(180, 0, 30, 0.35);
+}
+
+.tamanho-btn:hover,
+.tamanho-btn.ativo {
+    background-color: #96000F;
+    transform: scale(1.08);
+    box-shadow: 0 5px 14px rgba(180, 0, 30, 0.5);
+}
+
+/* ── Botão Adicionar ao Carrinho ── */
+.btn-carrinho {
+    display: none;
+    position: fixed;
+    bottom: 24px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: #C8001E;
+    color: #fff;
+    font-family: 'Montserrat', sans-serif;
+    font-size: 1rem;
+    font-weight: 700;
+    padding: 14px 40px;
+    border: none;
+    border-radius: 30px;
+    cursor: pointer;
+    box-shadow: 0 6px 20px rgba(180, 0, 30, 0.5);
+    transition: background 0.2s, transform 0.15s;
+    z-index: 100;
+    align-items: center;
+    gap: 10px;
+}
+
+.btn-carrinho:hover {
+    background: #96000F;
+    transform: translateX(-50%) scale(1.04);
+}
+
+/* ── Responsivo ── */
+@media (max-width: 600px) {
+    .logo-img {
+        width: 220px;
+    }
+
+    .cardapio-wrapper {
+        flex-direction: column;
+    }
+
+    .tamanho-panel {
+        flex-direction: row;
+        flex-wrap: wrap;
+        justify-content: center;
+        padding: 0;
+    }
+
+    .tamanho-label {
+        width: 100%;
+        text-align: center;
+    }
+
+    .cardapio {
+        max-height: 360px;
+    }
+}

@@ -1,29 +1,56 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt-BR">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0"><!DOCTYPE html>
-    <title>Pedido Realizado</title>
-
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pedido Realizado | Pizzaria Pinto's</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='css/sucesso.css') }}">
 </head>
-
 <body>
 
-    <main class="container">
+    <!-- Seta para voltar para a Home -->
+    <a href="{{ url_for('home') }}" class="btn-voltar">
+        <svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+            <polyline points="15 18 9 12 15 6"></polyline>
+        </svg>
+    </a>
 
-        <h1>
-            Pedido realizado com sucesso!
-        </h1>
+    <!-- Container Central -->
+    <main class="container-sucesso">
 
-        <p>
-            Pedido #{{ pedido.id }}
-        </p>
+        <!-- Círculo Vermelho com Check Branco -->
+        <div class="check-circle">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+                <polyline points="20 6 9 17 4 12"></polyline>
+            </svg>
+        </div>
 
-        <p>
-            Status:
-            {{ pedido.status }}
-        </p>
+        <!-- Títulos -->
+        <h1>Pedido Nº {{ "%05d"|format(pedido.id) }} confirmado!</h1>
+        <p>Obrigado pela preferência!</p>
+
+        <!-- Barra de Progresso de Status -->
+        <div class="progress-container">
+            
+            <!-- Etapa: Pendente -->
+            <div class="progress-step">
+                <div class="progress-bar {% if pedido.status in ['pendente', 'em preparo', 'entregue'] %}active{% endif %}"></div>
+                <span class="progress-label">Pendente</span>
+            </div>
+
+            <!-- Etapa: Em preparo -->
+            <div class="progress-step">
+                <div class="progress-bar {% if pedido.status in ['em preparo', 'entregue'] %}active{% endif %}"></div>
+                <span class="progress-label">Em preparo</span>
+            </div>
+
+            <!-- Etapa: Entregue -->
+            <div class="progress-step">
+                <div class="progress-bar {% if pedido.status == 'entregue' %}active{% endif %}"></div>
+                <span class="progress-label">Entregue</span>
+            </div>
+
+        </div>
 
     </main>
 

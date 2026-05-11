@@ -1,0 +1,248 @@
+/* =============================================
+   Carrinho - Pizzaria Pinto's
+   ============================================= */
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    background-color: #D30010; /* Fundo vermelho da imagem */
+    font-family: 'Montserrat', sans-serif;
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    padding: 20px 10px;
+}
+
+.container {
+    width: 100%;
+    max-width: 600px;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+/* ── Header ── */
+.header {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    margin-bottom: 8px;
+    margin-top: 10px;
+}
+
+.header h1 {
+    color: #FFFFFF;
+    font-size: 1.6rem;
+    font-weight: 800;
+}
+
+.btn-voltar {
+    position: absolute;
+    left: 0;
+    background: none;
+    border: none;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* ── Seções / Caixas Creme ── */
+.box-section {
+    background-color: #FFF8E7; /* Creme pastel */
+    border-radius: 40px;
+    padding: 24px 28px;
+    width: 100%;
+}
+
+/* ── Itens do Carrinho ── */
+.itens-lista {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+.item-card {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.item-thumb {
+    width: 38px;
+    height: 38px;
+    background-color: #D30010;
+    border-radius: 8px;
+    flex-shrink: 0;
+}
+
+.item-info {
+    flex: 1;
+}
+
+.item-info h2 {
+    font-size: 0.9rem;
+    font-weight: 700;
+    color: #000;
+    margin-bottom: 2px;
+}
+
+.item-info p {
+    font-size: 0.65rem;
+    color: #333;
+}
+
+.item-qty {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    background-color: #D1CAB8; /* Fundo bege do botão */
+    border-radius: 16px;
+    padding: 4px 12px;
+}
+
+.qty-btn {
+    color: #fff;
+    font-weight: 800;
+    cursor: pointer;
+    font-size: 1.1rem;
+}
+
+.qty-num {
+    color: #fff;
+    font-weight: 800;
+    font-size: 0.95rem;
+    min-width: 14px;
+    text-align: center;
+}
+
+/* ── Formulário (Endereço, Pagamento) ── */
+.form-section {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+.form-row {
+    display: flex;
+    gap: 16px;
+    width: 100%;
+}
+
+.form-group {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    flex: 1;
+}
+
+.form-group label {
+    font-size: 0.9rem;
+    font-weight: 500;
+    color: #000;
+}
+
+.form-group input,
+.form-group select {
+    background-color: #D1CAB8; /* Fundo dos inputs */
+    border: none;
+    border-radius: 12px;
+    padding: 10px 14px;
+    font-family: 'Montserrat', sans-serif;
+    font-size: 0.85rem;
+    color: #333;
+    outline: none;
+    width: 100%;
+    /* Aparência padrão do select */
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+}
+
+.form-group input::placeholder {
+    color: #999486;
+}
+
+.form-group select {
+    background-image: url("data:image/svg+xml;charset=US-ASCII,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%22292.4%22%20height%3D%22292.4%22%3E%3Cpath%20fill%3D%22%23000000%22%20d%3D%22M287%2069.4a17.6%2017.6%200%200%200-13-5.4H18.4c-5%200-9.3%201.8-12.9%205.4A17.6%2017.6%200%200%200%200%2082.2c0%205%201.8%209.3%205.4%2012.9l128%20127.9c3.6%203.6%207.8%205.4%2012.8%205.4s9.2-1.8%2012.8-5.4L287%2095c3.5-3.5%205.4-7.8%205.4-12.8%200-5-1.9-9.2-5.5-12.8z%22%2F%3E%3C%2Fsvg%3E");
+    background-repeat: no-repeat;
+    background-position: right 14px top 50%;
+    background-size: 10px auto;
+}
+
+/* ── Resumo / Totais ── */
+.resumo-section {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.resumo-linha {
+    display: flex;
+    justify-content: space-between;
+    font-size: 0.95rem;
+    color: #000;
+}
+
+.resumo-linha span {
+    font-weight: 400;
+}
+
+.resumo-linha strong {
+    font-weight: 800;
+}
+
+.linha-tracejada {
+    border-top: 1px dashed #000;
+    margin: 4px 0;
+}
+
+.total-final {
+    font-size: 1rem;
+}
+
+.total-final strong {
+    color: #D30010; /* Vermelho final */
+}
+
+/* ── Botão Finalizar Compra ── */
+.btn-container {
+    display: flex;
+    justify-content: center;
+    margin-top: 10px;
+}
+
+.btn-finalizar {
+    background-color: #D30010;
+    color: #fff;
+    font-family: 'Montserrat', sans-serif;
+    font-size: 1rem;
+    font-weight: 700;
+    border: none;
+    border-radius: 20px;
+    padding: 12px 30px;
+    cursor: pointer;
+    transition: transform 0.2s, background 0.2s;
+}
+
+.btn-finalizar:hover {
+    background-color: #A0000C;
+    transform: scale(1.02);
+}
+
+/* Responsivo para mobiles pequenos */
+@media (max-width: 450px) {
+    .box-section {
+        padding: 20px 20px;
+    }
+    
+    .form-row {
+        flex-direction: column;
+        gap: 12px;
+    }
+}

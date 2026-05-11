@@ -1,66 +1,117 @@
 <!DOCTYPE html>
-<html lang="pt-br">
+<html lang="pt-BR">
 <head>
     <meta charset="UTF-8">
-    <title>Carrinho</title>
-
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Carrinho | Pizzaria Pinto's</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='css/carrinho.css') }}">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;800&display=swap" rel="stylesheet">
 </head>
-
 <body>
+    <div class="container">
+        
+        <!-- Header -->
+        <header class="header">
+            <a href="{{ url_for('cardapio') }}" class="btn-voltar">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+                    <polyline points="15 18 9 12 15 6"></polyline>
+                </svg>
+            </a>
+            <h1>Carrinho</h1>
+        </header>
 
-    <main class="container">
+        <!-- Itens do Carrinho -->
+        <section class="box-section">
+            <div class="itens-lista">
+                {% if carrinho %}
+                    {% for item in carrinho %}
+                    <div class="item-card">
+                        <div class="item-thumb"></div>
+                        <div class="item-info">
+                            <h2>{{ item.nome }}</h2>
+                            <p>massa, molho de tomate, queijo...</p>
+                        </div>
+                        <div class="item-qty">
+                            <span class="qty-btn">+</span>
+                            <span class="qty-num">{{ item.quantidade }}</span>
+                            <span class="qty-btn">−</span>
+                        </div>
+                    </div>
+                    {% endfor %}
+                {% else %}
+                    <p style="text-align: center; color: #555; padding: 20px;">Seu carrinho está vazio.</p>
+                {% endif %}
+            </div>
+        </section>
 
-        <h1>Seu Carrinho</h1>
-
-        {% if carrinho %}
-
-            {% for item in carrinho %}
-
-                <div class="item">
-                    <h2>{{ item.nome }}</h2>
-
-                    <p>Quantidade: {{ item.quantidade }}</p>
-
-                    <p>Preço: R$ {{ item.preco }}</p>
-
-                    <p>
-                        Subtotal:
-                        R$ {{ item.preco * item.quantidade }}
-                    </p>
+        <form action="{{ url_for('finalizar') }}" method="POST">
+            <!-- Informações de Entrega e Pagamento -->
+            <section class="box-section form-section">
+                
+                <div class="form-row">
+                    <div class="form-group" style="flex: 2;">
+                        <label>Endereço</label>
+                        <input type="text" name="endereco" placeholder="Digite aqui" required>
+                    </div>
+                    <div class="form-group" style="flex: 1.5;">
+                        <label>Forma de pagamento</label>
+                        <select name="pagamento" required>
+                            <option value="" disabled selected>Selecione</option>
+                            <option value="dinheiro">Dinheiro</option>
+                            <option value="pix">PIX</option>
+                            <option value="cartao">Cartão</option>
+                        </select>
+                    </div>
                 </div>
 
-                <hr>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label>Bairro</label>
+                        <input type="text" name="bairro" placeholder="Digite aqui" required>
+                    </div>
+                    <div class="form-group">
+                        <label>Número</label>
+                        <input type="text" name="numero" placeholder="Digite aqui" required>
+                    </div>
+                    <div class="form-group">
+                        <label>Celular</label>
+                        <input type="text" name="celular" placeholder="Digite aqui" required>
+                    </div>
+                </div>
+                
+                <!-- Nome do cliente (para o banco de dados atual) -->
+                <input type="hidden" name="nome_cliente" value="Cliente App">
 
-            {% endfor %}
+            </section>
 
-            <h2>Total: R$ {{ total }}</h2>
+            <!-- Resumo Financeiro -->
+            <section class="box-section resumo-section">
+                <div class="resumo-linha">
+                    <span>Preço total</span>
+                    <strong>R$ {{ "%.2f"|format(total)|replace('.', ',') }}</strong>
+                </div>
+                <div class="resumo-linha">
+                    <span>Desconto aplicado</span>
+                    <strong>R$ 0,00</strong>
+                </div>
+                <div class="resumo-linha">
+                    <span>Frete</span>
+                    <strong>R$ 3,00</strong>
+                </div>
+                
+                <div class="linha-tracejada"></div>
+                
+                <div class="resumo-linha total-final">
+                    <span>Preço total</span>
+                    <strong>R$ {{ "%.2f"|format(total + 3)|replace('.', ',') }}</strong>
+                </div>
 
-            <form action="/finalizar" method="POST">
+                <div class="btn-container">
+                    <button type="submit" class="btn-finalizar">Finalizar compra</button>
+                </div>
+            </section>
+        </form>
 
-                <input
-                    type="text"
-                    name="nome_cliente"
-                    placeholder="Seu nome"
-                    required
-                >
-
-                <button type="submit">
-                    Finalizar Pedido
-                </button>
-
-            </form>
-            
-
-        {% else %}
-
-            <p>Seu carrinho está vazio.</p>
-
-        {% endif %}
-
-        
-
-    </main>
-
+    </div>
 </body>
 </html>

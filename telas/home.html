@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Pizzaria Pinto's</title>
+    <!-- Link do CSS ajustado para o Flask -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/home.css') }}">
+</head>
+
+<body>
+
+    <div class="container">
+
+        <!-- Caminho da logo ajustado para o que estamos usando no projeto -->
+        <img src="{{ url_for('static', filename='img/logo.pizza.png') }}" class="logo" alt="logo">
+
+        <p class="since">Since 2026</p>
+
+        <h2>Peça sua pizza!</h2>
+
+        <div class="buttons">
+            <!-- O botão pode ser um link para a rota do cardápio -->
+            <button id="cardapioBtn" onclick="window.location.href='{{ url_for('cardapio') }}'">Cardápio</button>
+        </div>
+    </div>
+
+    <script src="{{ url_for('static', filename='js/home.js') }}"></script>
+</body>
+
+</html>
