@@ -1,6 +1,6 @@
 from flask import Flask, render_template, request, redirect, url_for, session
 from db import db
-from models import Produto, Pedido, ItemPedido
+from models import Produto, Pedido, ItemPedido, ProdutoPreco
 
 
 
@@ -23,41 +23,44 @@ def home():
 
 @app.route('/cardapio')
 def cardapio():
-    # Não exibe produtos marcados como 'Antiga'
-    produtos = Produto.query.filter(~Produto.nome.contains('Antiga')).all()
+    produtos = Produto.query.filter_by(disponivel=True).all()
     return render_template('cardapio.html', produtos=produtos)
-
 
 
 @app.route('/add-carrinho', methods=['POST'])
 def add_carrinho():
     produto_id = int(request.form.get('produto_id'))
+    tamanho_escolhido = request.form.get('tamanho')
+    
     produto = Produto.query.get(produto_id)
+    variacao = ProdutoPreco.query.filter_by(produto_id=produto_id, tamanho=tamanho_escolhido).first()
 
-    if not produto:
+    if not variacao:
         return redirect(url_for('cardapio'))
     
     if 'carrinho' not in session:
         session['carrinho'] = []
 
     carrinho = session['carrinho']
+    item_existe = False
 
-    produto_existe = False
     for item in carrinho:
-        if item['id'] == produto.id:
+        if item['id'] == produto.id and item.get('tamanho') == tamanho_escolhido:
             item['quantidade'] += 1
-            produto_existe = True
+            item_existe = True
             break
 
-    if not produto_existe:
+    if not item_existe:
         carrinho.append({
             'id': produto.id,
             'nome': produto.nome,
-            'preco': produto.preco,
+            'preco': variacao.preco,
+            'tamanho': tamanho_escolhido,
             'quantidade': 1
         })
 
     session['carrinho'] = carrinho
+    session.modified = True
     return redirect(url_for('carrinho'))
 
 
@@ -122,6 +125,31 @@ def admin():
     return render_template('admin.html', produtos=produtos, pedidos=pedidos)
 
 
+@app.route('/admin/produto', methods=['POST'])
+def cadastrar_produto():
+    nome = request.form.get('nome')
+    descricao = request.form.get('descricao')
+    imagem = request.form.get('imagem')
+    
+    tamanhos_campos = ['preco_p', 'preco_m', 'preco_g', 'preco_gg']
+    
+    precos_preenchidos = all(request.form.get(campo) for campo in tamanhos_campos)
+
+    if not nome or not precos_preenchidos:
+        return redirect(url_for('admin'))
+
+    novo_produto = Produto(nome=nome, descricao=descricao, imagem=imagem)
+    db.session.add(novo_produto)
+    db.session.commit()
+
+    tamanhos_labels = {'preco_p': 'P', 'preco_m': 'M', 'preco_g': 'G', 'preco_gg': 'GG'}
+    
+    for campo, label in tamanhos_labels.items():
+        valor = request.form.get(campo)
+        db.session.add(ProdutoPreco(produto_id=novo_produto.id, tamanho=label, preco=float(valor)))
+
+    db.session.commit()
+    return redirect(url_for('admin'))
 
 @app.route('/admin/pedido/<int:id>/status', methods=['POST'])
 def alterar_status(id):
@@ -135,20 +163,22 @@ def alterar_status(id):
 
     return redirect(url_for('admin'))
 
-
-
-@app.route('/admin/produto', methods=['POST'])
-def cadastrar_produto():
-    nome = request.form.get('nome')
-    preco = float(request.form.get('preco'))
-    imagem = request.form.get('imagem')
-
-    produto = Produto(nome=nome, preco=preco, imagem=imagem)
-
-    db.session.add(produto)
+@app.route('/admin/produto/toggle/<int:id>', methods=['POST'])
+def toggle_produto(id):
+    produto = Produto.query.get_or_404(id)
+    produto.disponivel = not produto.disponivel
     db.session.commit()
-
     return redirect(url_for('admin'))
+
+@app.route('/admin/produto/remover/<int:id>', methods=['POST'])
+def remover_produto(id):
+    produto = Produto.query.get_or_404(id)
+    db.session.add(produto)
+    db.session.delete(produto)
+    db.session.commit()
+    return redirect(url_for('admin'))
+
+
     
 
 

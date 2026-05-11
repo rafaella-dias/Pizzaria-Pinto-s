@@ -39,7 +39,12 @@
                     <div class="pizza-info">
                         <h2>{{ produto.nome }}</h2>
                         <p>{{ produto.descricao }}</p>
-                        <span class="preco">R$ {{ "%.2f"|format(produto.preco)|replace('.', ',') }}</span>
+                        <span class="preco" id="preco-exibido-{{ produto.id }}" 
+                            {% for v in produto.variacoes %}
+                                data-{{ v.tamanho.lower() }}="{{ "%.2f"|format(v.preco)|replace('.', ',') }}"
+                            {% endfor %}>
+                            Selecione o tamanho
+                        </span>
                     </div>
 
                     <!-- Contador de quantidade -->
@@ -85,7 +90,18 @@
         function selecionarTamanho(tam, btn) {
             document.querySelectorAll('.tamanho-btn').forEach(b => b.classList.remove('ativo'));
             btn.classList.add('ativo');
+            
             tamanhoSelecionado = tam;
+
+            document.querySelectorAll('.preco').forEach(span => {
+                const valorData = span.getAttribute(`data-${tam.toLowerCase()}`);
+                if (valorData) {
+                    span.textContent = `${tam}: R$ ${valorData}`;
+                } else {
+                    span.textContent = "Indisponível";
+                }
+            });
+
             atualizarBotao();
         }
 
